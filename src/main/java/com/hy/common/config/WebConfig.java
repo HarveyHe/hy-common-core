@@ -2,14 +2,12 @@ package com.hy.common.config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hy.common.vague.VagueResolver;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
-
-
-import java.util.List;
 
 /**
   *
@@ -37,6 +35,12 @@ public class WebConfig {
         ObjectMapper objectMapper = builder.createXmlMapper(false).build();
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         return objectMapper;
+    }
+    
+
+    @Bean
+    public VagueResolver vagueResolver(){
+        return  new VagueResolver();
     }
 }
 
