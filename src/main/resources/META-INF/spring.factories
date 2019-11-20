@@ -1,1 +1,3 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.hy.common.config.UnifiedReturnConfig
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\ \
+  com.hy.common.config.UnifiedReturnConfig, \
+  com.hy.common.config.WebConfig
