@@ -1,5 +1,6 @@
 package com.hy.common.bean;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
@@ -15,6 +16,7 @@ import lombok.Data;
   */
 @Data
 @Builder
+@AllArgsConstructor
 public final class CommonResult {
     /**
      * 状态码，标识请求成功与否，如 [1:成功；-1:失败]
@@ -38,6 +40,10 @@ public final class CommonResult {
     
     public CommonResult(Object resultBody) {
         this.resultBody = resultBody;
+    }
+    public CommonResult(String errorCode, String errorMsg) {
+        this.errorCode = errorCode;
+        this.errorMsg = errorMsg;
     }
     
     /**
