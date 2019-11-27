@@ -11,5 +11,10 @@ package com.hy.common.vague.handler;
  */
 public interface VagueHandler {
     
+    /**
+     * @封装处理
+     * @param object 需要处理的对象
+     * @return 处理后的对象
+     */
     public Object handler(Object object);
 }

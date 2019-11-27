@@ -70,28 +70,16 @@ public class VagueResolver  {
      */
     public Object dataHandle(Object value){
         try {
-//            if (value instanceof com.github.pagehelper.Page) {
-//                return this.handListType((List<Object>) value);
-//            }
-//            else
+
             if(value instanceof ArrayList){
                 return this.handListType((List<Object>) value);
-            }
-//            else if(value instanceof PageInfo){
-//                PageInfo pageInfo= (PageInfo) value;
-//                return this.dataHandle(pageInfo.getList());
-//            }
-            else if(value instanceof List){
+            }else if(value instanceof List){
                 return this.handListType((List<Object>) value);
-            }
-            else if(value instanceof CommonResult){
+            }else if(value instanceof CommonResult){
                 CommonResult result= (CommonResult) value;
                 return this.dataHandle(result.getResultBody());
-            }
-            else {
+            }else {
                 return this.handPojoType(value);
-            
-                
             }
         }catch (Exception e){
             return value;
@@ -114,7 +102,7 @@ public class VagueResolver  {
                 //判断属性上是否有注解，如果有进入逻辑，如果没有，返回对象
                 if (fieldHasAnnotation) {
                     //如果属性是String 模糊化他（模糊化处理只能处理String了，不要问为什么）
-                    if(classType.equals("java.lang.String")){
+                    if("java.lang.String".equals(classType)){
                         Vague vague=field.getAnnotation(Vague.class);
                         String type=vague.type();
                         object=this.handleValue(field,object,type);
@@ -124,7 +112,10 @@ public class VagueResolver  {
                     else{
                         Class fieldClass =object.getClass();
                         String name=this.firstUpperCase(field.getName());
-                        field.setAccessible(true);// 设置操作权限为true
+                        /**
+                         * 设置操作权限为true
+                         */
+                        field.setAccessible(true);
                         Method getMethod= null;
                         try {
                             getMethod = fieldClass.getMethod("get"+name);
@@ -151,32 +142,15 @@ public class VagueResolver  {
         }
         return page;
     }
-//    public Object handPageType(Page page){
-//        if (page != null && !page.isEmpty()) {
-//            Object object = page.get(0);
-//            Class clz =object.getClass();
-//            // 判断类上是否有次注解
-//            Field[] fields = clz.getDeclaredFields();
-//            for (Field field : fields) {
-//                boolean fieldHasAnno = field.isAnnotationPresent(Vague.class);
-//                if (fieldHasAnno) {
-//                    Vague vague=field.getAnnotation(Vague.class);
-//                    String type=vague.type();
-//                    for(int i=0;i<page.size();i++){
-//                        Object o=page.get(i);
-//                        o=this.handleValue(field,o,type);
-//                        page.set(i,o);
-//                    }
-//                }
-//            }
-//        }
-//        return page;
-//    }
+
     public Object handleValue(Field field,Object object,String type){
         try {
             Class clz =object.getClass();
             String name=this.firstUpperCase(field.getName());
-            field.setAccessible(true);// 设置操作权限为true
+            /**
+             * 设置操作权限为true
+             */
+            field.setAccessible(true);
             Method getMethod=clz.getMethod("get"+name);
             Object value=getMethod.invoke(object);
             Method setMethod=clz.getMethod("set"+name,field.getType());

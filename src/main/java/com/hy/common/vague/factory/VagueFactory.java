@@ -32,7 +32,9 @@ public class VagueFactory {
                 return new AddresVagueHandler();
             case Constants.PHONE_NO:
                 return new PhoneVagueHandler();
+            default:
+                return new DefaultVagueHandler();
         }
-        return new DefaultVagueHandler();
+        
     }
 }
