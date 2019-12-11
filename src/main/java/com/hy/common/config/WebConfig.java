@@ -37,7 +37,11 @@ public class WebConfig {
         return objectMapper;
     }
     
-
+    
+    /**
+     * 注入 模糊化处理
+     * @return
+     */
     @Bean
     public VagueResolver vagueResolver(){
         return  new VagueResolver();

@@ -37,7 +37,7 @@ public class VagueResolver  {
    
     
     @Pointcut("@annotation(com.hy.common.vague.annotation.Vague)")
-    public void serviceStatistics() {
+    public void vaguePoint() {
     
     }
     
